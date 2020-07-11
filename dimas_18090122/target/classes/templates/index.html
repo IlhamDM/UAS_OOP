@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Aplikasi Data Mahasiswa</title>
+</head>
+<body>
+<h1>Selamat Datang di Aplikasi Data Mahasiswa</h1>
+<form action="/tambah">
+    <input type="submit" value="Tambah Data" />
+</form>
+</br>
+
+<div th:switch="${data}">
+    <div>
+        <h2 th:case="null">Tidak ada data</h2>
+        <div th:case="*">
+            <table border="1" cellpadding="10">
+                <thead>
+                <tr bgcolor="#ffdab9">
+                    <th>Nim</th>
+                    <th>Nama</th>
+                    <th>Jurusan</th>
+                    <th>Alamat</th>
+                    <th colspan="2">Opsi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="data : ${data}" bgcolor="#ffefd5">
+                    <td th:text="${data.nim}"></td>
+                    <td th:text="${data.nama}"></td>
+                    <td th:text="${data.jurusan}"></td>
+                    <td th:text="${data.alamat}"></td>
+                    <td><button type="button">
+                        <a th:href="@{/ubah/{nim}(nim=${data.nim})}">Ubah Data</a>
+                    </button></td>
+                    <td><button type="button">
+                        <a th:href="@{/hapus/{nim}(nim=${data.nim})}">Hapus Data</a>
+                    </button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
